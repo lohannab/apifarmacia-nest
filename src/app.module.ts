@@ -9,13 +9,10 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     ConfigModule.forRoot(),
 
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useClass:
-        process.env.NODE_ENV === 'production'
-          ? ProdService
-          : DevService,
-    }),
+  TypeOrmModule.forRootAsync({
+  imports: [ConfigModule],
+  useClass: process.env.DATABASE_URL ? ProdService : DevService,
+}),
     CategoriaModule,
   ],
 })
