@@ -1,19 +1,22 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriaModule } from './categoria/categoria.module';
-import { DevService } from './data/services/dev.service';
-import { ProdService } from './data/services/prod.service';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
 
-  TypeOrmModule.forRootAsync({
-  imports: [ConfigModule],
-  useClass: process.env.DATABASE_URL ? ProdService : DevService,
-}),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+
     CategoriaModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
