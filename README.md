@@ -52,7 +52,7 @@ API desenvolvida com **NestJS** para gerenciamento de categorias de uma farmáci
 
 Acesse a documentação interativa da API:
 
-🔗 **em breve**
+🔗 **Em breve...**
 
 > 🚀 API hospedada online e pronta para testes.
 
