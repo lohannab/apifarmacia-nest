@@ -52,7 +52,7 @@ API desenvolvida com **NestJS** para gerenciamento de categorias de uma farmáci
 
 Acesse a documentação interativa da API:
 
-🔗 **Em breve...**
+🔗 **[Teste a API](https://projeto-final-bloco-02-1-12bi.onrender.com/swagger#/)**
 
 > 🚀 API hospedada online e pronta para testes.
 
