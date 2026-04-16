@@ -1,20 +1,23 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Categoria } from './categoria/entities/categoria.entity';
 import { CategoriaModule } from './categoria/categoria.module';
-
+import { DevService } from './data/services/dev.service';
+import { ProdService } from './data/services/prod.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-       type: 'sqlite',
-      database: 'db.sqlite',
-      entities: [Categoria],
-      synchronize: true,
+    ConfigModule.forRoot(),
+
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useClass:
+        process.env.NODE_ENV === 'production'
+          ? ProdService
+          : DevService,
     }),
+
     CategoriaModule,
   ],
-    controllers: [],
-    providers: [],
 })
-export class AppModule { }
+export class AppModule {}
