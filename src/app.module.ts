@@ -11,13 +11,9 @@ import { ConfigModule } from '@nestjs/config';
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useClass:
-        process.env.NODE_ENV === 'production'
-          ? ProdService
-          : DevService,
+      useClass: process.env.DATABASE_URL ? ProdService : DevService,
     }),
-
     CategoriaModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
